@@ -29,5 +29,5 @@ urlpatterns += [
     path('', RedirectView.as_view(url='catalog/', permanent=True)),
 ]
 
-# Enable serving static files during development (CSS, JS, images)
+# enable serving static files during development (CSS, JS, images)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
