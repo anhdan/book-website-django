@@ -1,0 +1,24 @@
+# book-website-django
+
+## Working procedure
+
+### 1. Initialize project
+
+**Start a new project**
+
+```
+django-admin startproject project_name .
+tree
+python3 manage.py runserver
+```
+
+**Use *manage.py* to create one or more application**
+```
+python3 manage.py startapp app_name
+```
+
+**Register new application to include them in the project**
+
+  - Applications are registered by adding them to the INSTALLED_APPS list in the project settings.
+
+**Hook up the url/path mapper for each application**
