@@ -8,7 +8,7 @@ admin.site.register(Language)
 # Register models with admin enabled
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('book', 'status', 'due_back', 'id')
+    list_display = ('book', 'status', 'borrower', 'due_back', 'id')
     list_filter = ('status', 'due_back')
     # Sectioning the fields in detail view
     fieldsets = (
@@ -22,7 +22,8 @@ class BookInstanceAdmin(admin.ModelAdmin):
         ('Availability', {
             "fields": (
                 'status',
-                'due_back'
+                'due_back',
+                'borrower'
             )
         })
     )
