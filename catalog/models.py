@@ -34,6 +34,9 @@ class Book(models.Model):
     # Language as OneToManyField
     language = models.ForeignKey('Language', help_text='Select a genre for this book', on_delete=models.SET_NULL, null=True)
 
+    class Meta:
+        permissions = (("can_mark_returned", "Set book as returned"),)
+
     def __str__(self):
         """String for representing the Model object."""
         return self.title
