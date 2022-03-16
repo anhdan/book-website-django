@@ -10,4 +10,7 @@ urlpatterns = [
     # homework - showing authors list and author details
     path( 'authors/', views.AuthorListView.as_view(), name='authors' ),
     path( 'author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
+
+    # homework - showing list of all borrowed books to librarian
+    path( 'borrowed/', views.BorrowBookListView.as_view(), name='borrowed-books'),
 ]
