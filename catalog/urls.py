@@ -14,3 +14,7 @@ urlpatterns = [
     # homework - showing list of all borrowed books to librarian
     path( 'borrowed/', views.BorrowBookListView.as_view(), name='borrowed-books'),
 ]
+
+urlpatterns += [
+    path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
+]
