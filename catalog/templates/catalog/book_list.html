@@ -5,8 +5,12 @@
   {% if book_list %}
   <ul>
     {% for book in book_list %}
+      <hr>
       <li>
         <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+        {% if perms.catalog.can_manage_book %}
+        <p><a href="{% url 'book-update' book.pk %}">Update</a> <a class="text-danger" href="{% url 'book-delete' book.pk %}">Delete</a></p>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>

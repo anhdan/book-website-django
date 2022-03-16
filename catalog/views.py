@@ -1,6 +1,3 @@
-from re import template
-from statistics import mode
-from unicodedata import name
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -11,6 +8,8 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from catalog.forms import RenewBookForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 # Function to show index page:
@@ -122,3 +121,38 @@ def renew_book_librarian(request, pk):
     }
 
     return render(request, 'catalog/book_renew_librarian.html', context)
+
+
+#==== Django generic editing form for author
+class AuthorCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.can_manage_author'
+    model = Author
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+    initial = {'date_of_death': '11/06/2020'}
+
+class AuthorUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalog.can_manage_author'
+    model = Author
+    fields = '__all__' # Not recommended (potential security issue if more fields added)
+
+class AuthorDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'catalog.can_manage_author'
+    model = Author
+    success_url = reverse_lazy('authors')
+
+
+#==== Django generic editing form for book
+class BookCreate( PermissionRequiredMixin, CreateView ):
+    permission_required = 'catalog.can_manage_book'
+    model = Book
+    fields = '__all__'
+
+class BookUpdate( UpdateView ):
+    permission_required = 'catalog.can_manage_book'
+    model = Book
+    fields = '__all__'
+
+class BookDelete( DeleteView ):
+    permission_required = 'catalog.can_manage_book'
+    model = Book
+    success_url = reverse_lazy('books')

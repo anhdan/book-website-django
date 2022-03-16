@@ -35,7 +35,7 @@ class Book(models.Model):
     language = models.ForeignKey('Language', help_text='Select a genre for this book', on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        permissions = (("can_mark_returned", "Set book as returned"),)
+        permissions = (("can_manage_book", "Create, Update and Delete Book"),)
 
     def __str__(self):
         """String for representing the Model object."""
@@ -100,6 +100,7 @@ class Author(models.Model):
 
     class Meta:
         ordering = ['last_name', 'first_name']
+        permissions = (("can_manage_author", "Create, Update and Delete Author"),)
 
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
